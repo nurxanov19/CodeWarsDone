@@ -1,4 +1,7 @@
 import math
+from math import factorial, sqrt
+from functools import reduce
+
 # 1. Har bir sonni raqamlar soniga ko'paytiring (map + lambda). Masalan: 123 -> 123 * 3 = 369
 num_var = 12345
 
@@ -64,6 +67,41 @@ lst1 = [45,12,88,3,76,59,21,91,6]
 lst2 = [98,17,55,32,81,67,4,73,29]
 lst3 = [15,62,9,41,78,25,50,85,38]
 
-zipped = tuple(zip(lst1, lst2, lst3))
+#zipped = tuple(zip(lst1, lst2, lst3))
 result = list(filter(lambda x: sum(x) < 100, tuple(zip(lst1, lst2, lst3))))
 print(result)
+
+# 6. Har bir sonni uning raqamlarining faktoriallari yig'indisiga aylantiring (map + lambda)
+
+result = list(map(lambda x: sum([factorial(int(i)) for i in str(x)]), lst1))
+print(result)
+
+result2 = list(map(lambda x: sum([reduce(lambda a, b: int(a) * int(b), range(1, int(i)+1)) for i in str(x)]), lst1))
+print(result2)
+
+
+# 7. Ro'yxatdagi har bir sonning kvadrat ildizini hisoblab, faqat butun chiqadiganlarni ajrating (map + filter + lambda).
+
+seventh = list(map(int, list(filter(lambda x: str(float(x))[-1] == '0', list(map(sqrt, lst3))))))
+
+print()
+print(seventh)
+
+
+# 8. Berilgan string-lardan faqat uzunligi tub son bo'lganlarini qoldiring (filter + lambda).
+
+my_strs = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew", "kiwi", "lemon", "mango", "nectarine", "orange", "plum", "quince"]
+def complex(str: str):
+    
+    collect = []
+    for j in str:
+        counter = 0
+        for i in range(1, len(j)+1):
+            if len(j)%i == 0:
+                counter += 1
+        if counter == 2:
+            collect.append(j)
+    return collect
+print(complex(my_strs))
+
+eightth = list(filter())
